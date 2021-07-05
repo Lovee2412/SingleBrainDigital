@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.9.5 on win32)" generated="20210704 19:09:18.226" rpa="false">
+<suite id="s1" name="LinkedInDeMo" source="D:\SingleBrainDigital\LinkedInDeMo\LinkedInDeMo">
+<suite id="s1-s1" name="Src" source="D:\SingleBrainDigital\LinkedInDeMo\LinkedInDeMo\src">
+<suite id="s1-s1-s1" name="CommonTestSuite" source="D:\SingleBrainDigital\LinkedInDeMo\LinkedInDeMo\src\CommonTestSuite.robot">
+<test id="s1-s1-s1-t1" name="SmartScout">
+<kw name="Wait Until Keyword Succeeds" library="BuiltIn">
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<arguments>
+<arg>2x</arg>
+<arg>3s</arg>
+<arg>smartscout for multiple category</arg>
+</arguments>
+<kw name="smartscout for multiple category">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Starting SmartScout</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Input File path=${inputfilepath}</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="login to smartscout" library="SmartScoutapp">
+<kw name="common Open brower" library="SmartScoutapp">
+<arguments>
+<arg>${smartscoutURL}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+</arguments>
+<assign>
+<var>${chrome_options}</var>
+</assign>
+<msg timestamp="20210704 19:09:19.413" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x0000027EFBF14FD0&gt;</msg>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>download.default_directory=${downloadDir}</arg>
+</arguments>
+<assign>
+<var>${prefs}</var>
+</assign>
+<msg timestamp="20210704 19:09:19.413" level="INFO">${prefs} = {'download.default_directory': 'D:\\SingleBrainDigital\\LinkedInDeMo\\LinkedInDeMo'}</msg>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${chrome_options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${EXECDIR}${/}</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>browserName=${browserName}</arg>
+</arguments>
+<assign>
+<var>${desired_caps}</var>
+</assign>
+<msg timestamp="20210704 19:09:19.413" level="INFO">${desired_caps} = {'browserName': 'chrome'}</msg>
+<status status="PASS" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.413"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>url=${url}</arg>
+<arg>browser=chrome</arg>
+<arg>desired_capabilities=${desired_caps}</arg>
+<arg>options=${chrome_options}</arg>
+<arg>executable_path=${EXECDIR}${/}LinkedInDemo${/}chromedriver.exe</arg>
+</arguments>
+<msg timestamp="20210704 19:09:19.413" level="INFO">Opening browser 'chrome' to base url 'https://app.smartscout.com/sessions/signin'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210704 19:09:19.445" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20210704 19:09:19.445" endtime="20210704 19:09:19.445"></status>
+</kw>
+<msg timestamp="20210704 19:09:19.480" level="FAIL">WebDriverException: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+</msg>
+<status status="FAIL" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.480"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.481"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.486"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:19.413" endtime="20210704 19:09:19.486"></status>
+</kw>
+<kw name="smartscout for multiple category">
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Starting SmartScout</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:22.499" endtime="20210704 19:09:22.499"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Input File path=${inputfilepath}</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:22.503" endtime="20210704 19:09:22.505"></status>
+</kw>
+<kw name="login to smartscout" library="SmartScoutapp">
+<kw name="common Open brower" library="SmartScoutapp">
+<arguments>
+<arg>${smartscoutURL}</arg>
+</arguments>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+</arguments>
+<assign>
+<var>${chrome_options}</var>
+</assign>
+<msg timestamp="20210704 19:09:22.505" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x0000027EFBF95A90&gt;</msg>
+<status status="PASS" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.505"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>download.default_directory=${downloadDir}</arg>
+</arguments>
+<assign>
+<var>${prefs}</var>
+</assign>
+<msg timestamp="20210704 19:09:22.505" level="INFO">${prefs} = {'download.default_directory': 'D:\\SingleBrainDigital\\LinkedInDeMo\\LinkedInDeMo'}</msg>
+<status status="PASS" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.505"></status>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<arguments>
+<arg>${chrome_options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.505"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${EXECDIR}${/}</arg>
+</arguments>
+<status status="PASS" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.505"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>browserName=${browserName}</arg>
+</arguments>
+<assign>
+<var>${desired_caps}</var>
+</assign>
+<msg timestamp="20210704 19:09:22.505" level="INFO">${desired_caps} = {'browserName': 'chrome'}</msg>
+<status status="PASS" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.505"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>url=${url}</arg>
+<arg>browser=chrome</arg>
+<arg>desired_capabilities=${desired_caps}</arg>
+<arg>options=${chrome_options}</arg>
+<arg>executable_path=${EXECDIR}${/}LinkedInDemo${/}chromedriver.exe</arg>
+</arguments>
+<msg timestamp="20210704 19:09:22.505" level="INFO">Opening browser 'chrome' to base url 'https://app.smartscout.com/sessions/signin'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20210704 19:09:22.520" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20210704 19:09:22.520" endtime="20210704 19:09:22.520"></status>
+</kw>
+<msg timestamp="20210704 19:09:22.520" level="FAIL">WebDriverException: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+</msg>
+<status status="FAIL" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.520"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.520"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:22.505" endtime="20210704 19:09:22.520"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:22.499" endtime="20210704 19:09:22.520"></status>
+</kw>
+<msg timestamp="20210704 19:09:22.520" level="FAIL">Keyword 'smartscout for multiple category' failed after retrying 2 times. The last error was: WebDriverException: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+</msg>
+<status status="FAIL" starttime="20210704 19:09:19.412" endtime="20210704 19:09:22.520"></status>
+</kw>
+<status status="FAIL" starttime="20210704 19:09:19.411" endtime="20210704 19:09:22.520" critical="yes">Keyword 'smartscout for multiple category' failed after retrying 2 times. The last error was: WebDriverException: Message: 'chromedriver.exe' executable needs to be in PATH. Please see https://sites.google.com/a/chromium.org/chromedriver/home
+</status>
+</test>
+<status status="FAIL" starttime="20210704 19:09:18.366" endtime="20210704 19:09:22.520"></status>
+</suite>
+<status status="FAIL" starttime="20210704 19:09:18.351" endtime="20210704 19:09:22.520"></status>
+</suite>
+<status status="FAIL" starttime="20210704 19:09:18.304" endtime="20210704 19:09:22.520"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="LinkedInDeMo">LinkedInDeMo</stat>
+<stat pass="0" fail="1" id="s1-s1" name="Src">LinkedInDeMo.Src</stat>
+<stat pass="0" fail="1" id="s1-s1-s1" name="CommonTestSuite">LinkedInDeMo.Src.CommonTestSuite</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
