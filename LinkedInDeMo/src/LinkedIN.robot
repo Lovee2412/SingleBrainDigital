@@ -58,10 +58,12 @@ serach for people
 
 
 get company details
-    [Arguments]  ${name}  ${id}  ${index}  ${inputFilePath}   ${outputcolstart}
+    [Arguments]  ${name}    ${index}  ${inputFilePath}   ${outputcolstart}
+    Open Excel Document    ${inputFilePath}    doc_id=input5
     Wait Until Page Contains Element       //a[contains(@href,'about') and contains(.,'About')]   40s
-    Run Keyword And Continue On Failure    Wait Until Page Contains Element    //span[contains(.,'See all details')]  40s     
-    Run Keyword And Continue On Failure    common Click Element  ${empty}   //span[contains(.,'See all details')] 
+    Run Keyword And Continue On Failure    click element    //a[contains(@href,'about') and contains(.,'About')]    
+    Run Keyword And Continue On Failure    Wait Until Page Contains Element    //span[contains(.,'See all details')]  20s     
+    Run Keyword And Continue On Failure    Click Element     //span[contains(.,'See all details')] 
     Run Keyword And Continue On Failure    Wait Until Page Contains Element    (//a[@rel="noopener noreferrer"])[2]    20s       
     ${company_url}  Run Keyword And Continue On Failure  Get Element Attribute   (//a[@rel="noopener noreferrer"])[2]   href      
     Log To Console    CompanyURL = ${company_url} 
@@ -69,7 +71,7 @@ get company details
     Log To Console    LinkedinURL = ${company_linkedin}
     Run Keyword If  '${company_url}'=='None'   Return From Keyword    
     Go To    ${company_url}
-    Switch Current Excel Document    ${id} 
+    #Switch Current Excel Document    ${id} 
     ${companywebsitecol}=    Evaluate    ${outputcolstart}+1     
     Write Excel Cell    ${index}    ${companywebsitecol}    ${company_url} 
     ${linkedurlcol}=    Evaluate    ${outputcolstart}+2
@@ -80,38 +82,15 @@ get company details
     Log To Console    Facebook = ${facebook} 
     ${facebookurlcol}=    Evaluate    ${outputcolstart}+3
     Write Excel Cell    ${index}    ${facebookurlcol}    ${facebook}  
-    Run Keyword And Continue On Failure  Wait Until Page Contains Element        //a[contains(@href,'instagram')]    20s
+    Run Keyword And Continue On Failure  Wait Until Page Contains Element        //a[contains(@href,'instagram')]    10s
     ${instagram}=  Run Keyword And Continue On Failure  Get Element Attribute    //a[contains(@href,'instagram')]    href
     Log To Console    Instagram = ${instagram}
     ${instagramurlcol}=    Evaluate    ${outputcolstart}+4
     Write Excel Cell    ${index}    ${instagramurlcol}    ${instagram}  
     Go to  ${linkedin_URL}
-    Save Excel Document    ${inputFilePath}       
+    Save Excel Document    ${inputFilePath} 
+    Close Current Excel Document      
       
 
-# Find contact person details
-    # [Arguments]        ${brandname}   ${keyword}
-    # Open Browser    ${googleURL}        gc    
-    # Maximize Browser Window
-    # Wait Until Page Contains Element    //input[@name="q"]        30s
-    # Input Text                          //input[@name="q"]        ${keyword} At ${brandname} linkedin
-    # Press Keys                          //input[@name="q"]        RETURN
-    # ${status}=    Run Keyword And Return Status  Wait Until Page Contains Element    //a[contains(@href,'www.linkedin.com')]    40s
-    # Run Keyword If  '${status}'=='True'    Click Element                       //a[contains(@href,'www.linkedin.com')]
-    # ...     ELSE     Click Element                       //a[contains(@href,'ca.linkedin.com')]
-    # Wait Until Page Contains Element    //p//button[contains(.,'Sign in')]         40s
-    # Click Element                       //p//button[contains(.,'Sign in')]    
-    # Wait Until Page Contains Element    //input[@id="login-email"]                 40s
-    # input text                          //input[@id="login-email"]                 ${username}
-    # input text                          //input[@id="login-password"]              lavisha@143    
-    # click element                       //button[@id="login-submit"]
-    # ${personname}=                      Get Text                                   //h1[@class="text-heading-xlarge inline t-24 v-align-middle break-words"]  
-    # log to console                      Person Name = ${personname}
-    # ${position}=                        get text                                   //div[@class="text-body-medium break-words"]
-    # log to console                      Position = ${position}
-    # ${PersonlinkedInUrl}=               Get Location       
-    # Log To Console                      Person linkedin = ${PersonlinkedInUrl} 
-    # Wait Until Page Contains Element    //a[contains(.,'Contact info')]            40s
-    # Click Element                       //a[contains(.,'Contact info')]
-   # # Go To                               ${googleURL} 
+
     

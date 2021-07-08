@@ -4,7 +4,7 @@ Library    SeleniumLibrary
 *** Variables ***
 ${browserName}                  chrome
 ${downloadDir}                ${EXECDIR}${/}LinkedInDeMo${/}Assets${/}Input
-${time}                       60s
+${time}                       20s
 
 *** Keywords ***
 common Open brower

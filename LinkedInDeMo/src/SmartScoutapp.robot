@@ -70,7 +70,8 @@ smartscout brand info export
     common Click Element      Clicking on Search                 //button[@id="btnSearchBrands"]   
     sleep                               3s
     #Wait Until Page Contains Element    //span[@style="transform: rotate(180deg);"]           50s    
-    common Click Element    Clicking on arrow                   //span[@style="transform: rotate(180deg);"]    
+    common Click Element    Clicking on arrow                   //span[@style="transform: rotate(180deg);"]   
+    Wait Until Page Does Not Contain    Loading    60s     
     sleep                               3s
     #Wait Until Page Contains Element    //img[@src="/assets/buyboxer/images/excel.png"]       50s    
     common Click Element     Clicking on excel                  //img[@src="/assets/buyboxer/images/excel.png"]  

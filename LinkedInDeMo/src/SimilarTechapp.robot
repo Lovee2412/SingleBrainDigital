@@ -43,8 +43,8 @@ ${browserName}                  chrome
 
 
 SimilarTech
-    [Arguments]      ${id}   ${rownum}  ${outputColstart}
-       
+    [Arguments]      ${filename}   ${rownum}  ${outputColstart}
+       Open Excel Document    ${filename}    doc_id=id
         Reload Page 
         Run Keyword And Continue On Failure  Wait Until Page Contains Element    //div[@class="visits-value"]    60s
         ${monthlyvisit}=  Run Keyword And Continue On Failure   get text        //div[@class="visits-value"] 
@@ -65,7 +65,7 @@ SimilarTech
         Log to console                    Mail = ${mail} 
         log to console        *********************************************   
         
-        Switch Current Excel Document    ${id}
+        #Switch Current Excel Document    ${id}
         ${monthlycol}=  Evaluate    ${outputColstart}+5    
         ${directcol}=  Evaluate     ${outputColstart}+6
         ${serachcol}=   Evaluate     ${outputColstart}+7    
@@ -80,4 +80,5 @@ SimilarTech
         Write Excel Cell    ${rownum}     ${referralscol}    ${referrals}
         Write Excel Cell    ${rownum}     ${mailcol}         ${mail}
         Write Excel Cell    ${rownum}     ${displaycol}        ${display}
-
+        Save Excel Document    ${filename}
+        Close Current Excel Document
