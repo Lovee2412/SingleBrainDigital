@@ -9,8 +9,7 @@ ${linkedin_URL}            https://www.linkedin.com/
 @{BrandName}               Utzy Naturals    Lifoam    Aulterra    YoRo Naturals    MPM Medical    Cured Nutrition    Corflex    Nutriumph    Provenza Floors
 ...    BRUSHEAN    Pure and Clean    Anchor Packaging    Extend Nutrition    Purple Rose Supply    Seattle Elderberry LLC    Java Jacket
 
-${username}                lavanyaballa24@gmail.com
-${password}                lavisha@143
+
 ${outputExcelPath}         ${EXECDIR}${/}output${/}demo.xlsx
 ${index}                   2
  
@@ -33,28 +32,25 @@ Search by company name
     common Input Text  ${empty}  //input[@placeholder="Search"]    ${company_name}
     Press Keys   //input[@placeholder="Search"]  RETURN  
             
-   # Run Keyword If   '${st}'=='False'      Return From Keyword    
     Run Keyword And Continue On Failure  Wait Until Page Contains     People      40s      
     Wait Until Page Contains    Companies   40s
-    #Wait Until Page Contains Element        //button[contains(.,'Companies')]       40s
-    common Click Element  ${empty}   //button[contains(.,'Companies')]
-    ${st}=  Run Keyword And Return Status    Wait Until Page Contains Element    //h1[text()='No results found']  5s
+    Wait Until Page Contains Element        //button[@aria-label="Companies"]     20s
+    Click Element     //button[@aria-label="Companies"]
+    #Run Keyword And Continue On Failure  common Click Element  ${empty}   //button[@aria-label="Companies"]
+    #Run Keyword And Continue On Failure  common Click Element  ${empty}   //button[@aria-label="Companies"]
+    ${st}=  Run Keyword And Return Status    Wait Until Page Contains Element    //h1[text()='No results found']  10s
     #log to console    no result status = ${st}   
     Run Keyword If   '${st}'=='True'      Return From Keyword   False
-    #Wait Until Page Contains Element    //span[@class="entity-result__title-text${SPACE}${SPACE}t-16"]  60s        
+    
+    ${st1}=  Run Keyword And Return Status    Wait Until Page Contains Element    //div[@class="t-14 t-black--light" and contains(.,'No results for')]     10s    
+    
+    Run Keyword If    '${st1}'=='True'    Return From Keyword   False        
+
+        
     ${status}=   Run Keyword And Return Status  common Click Element  ${empty}  //span[@class="entity-result__title-text${SPACE}${SPACE}t-16"] 
     [Return]    ${status}
 
-serach for people
-    [Arguments]    ${company_name}
-    #Wait Until Page Contains Element        //input[@placeholder="Search"]    60s
-    Input Text    //input[@placeholder="Search"]    ${company_name}
-    Press Keys   //input[@placeholder="Search"]  RETURN  
-    Wait Until Page Contains    People      40s      
-    Wait Until Page Contains    Companies   40s
-    Wait Until Page Contains Element       //button[contains(.,'People')]        50s
-    click element     //button[contains(.,'People')]
-    
+
 
 
 get company details

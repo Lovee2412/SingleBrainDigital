@@ -6,7 +6,8 @@ library     ExcelLibrary
 Library     SeleniumLibrary
 Library     OperatingSystem    
 Library     DateTime  
-Library     String      
+Library     String  
+Test Teardown    Remove Files    ${EXECDIR}${/}*.png    
 
 *** Variables ***
 ${inputfilepath}    ${empty}
@@ -20,11 +21,12 @@ ${inputfilepath}    ${empty}
 # Prepare excel 
    # Prepare Output Excel
     
-# Linkedin 
-     # linkedin Flow
+Linkedin
+    #Log To Console    ${EXECDIR}     
+    linkedin Flow
      
-SimilarTech 
-    SimilarTech excel Demo
+# SimilarTech 
+    # SimilarTech excel Demo
 
 
      
@@ -136,34 +138,43 @@ linkedin Flow
     Log to console   Reading data from excel file= ${filename}       
     ${currentrow}=  read excel cell    7   6
     Log to console  Current Row Number= ${currentrow}
+    ${category}=   Read Excel Cell    13    3    
     Close Current Excel Document
     login to LinkedIn   ${username}       ${password}
     Open Excel Document    ${filename}    doc_id=input5
     ${list}=    Read Excel Column    ${brandcolnum} 
     Close Current Excel Document
+    Create File    ${EXECDIR}${/}LinkedInDeMo${/}Assets${/}Input${/}Logs${/}${category}.txt
+        
     ${len}=   Get Length    ${list}
     Log To Console    Toltal Brands =${len} 
-    FOR    ${count}    IN RANGE   ${currentrow}    11  #${len} 
+    FOR    ${count}    IN RANGE   ${currentrow}  10   #{} 
         Log To Console    ******************************************    
         Log to console    Row Number ${count} Out of Brands ${len}
-        Log To Console    Company Name=${list}[${count}]    
+        Log To Console    Company Name=${list}[${count}]
+        ${lines}=   grep file   ${EXECDIR}${/}LinkedInDeMo${/}Assets${/}Logs${/}${category}.txt   ${list}[${count}]
+        ${length}=   Get Length    ${lines}
+        #log to console    ${lines}
+        #Log To Console    ${length}
+        ${rowcount}=   Evaluate    ${count}+1    
+        Run Keyword If    ${length}!=0     contiune for loop and update count linkedin   ${count}    ${rowcount}  ${len}    Brand details already fatched
+         
+        #Log To Console    Written in file        
         ${status}=  Search by company name  ${list}[${count}]
-        #Log To Console    ${status} 
-        ${rowcount}=   Evaluate    ${count}+1   
-        Run Keyword if    '${status}'=='False'   contiune for loop and update count linkedin   ${count}    ${rowcount}  ${len}     
-            
+        Log To Console    ${status}  
+        Run Keyword if    '${status}'=='False'   contiune for loop and update count linkedin   ${count}    ${rowcount}  ${len}  Brand details not available on LinkedIn
         get company details  ${list}[${count}]  ${rowcount}  ${filename}  ${outputcolstart}
         Log To Console     ******************************************
         Open Excel Document    ${inputfilepath}    doc_id=input4
         Write Excel Cell    7    6    ${rowcount} 
         Write Excel Cell    9    6    ${count}
         ${pending}=  Evaluate   ${len}-${count} 
-        Write Excel Cell    10    6    ${pending} 
+        Write Excel Cell    10    6    ${pending}
         Write Excel Cell    8    6    ${len} 
         Save Excel Document    ${inputfilepath} 
         Close Current Excel Document  
-     END
-    #Save Excel Document    ${filename}
+         Append To File    ${EXECDIR}${/}LinkedInDeMo${/}Assets${/}Logs${/}${category}.txt    content=${list}[${count}]\n
+    END
     Close All Excel Documents
     Log To Console    *********************************************************
     
@@ -193,7 +204,7 @@ SimilarTech excel Demo
     Close Current Excel Document
     #Log To Console    ${list}    
     common Open brower    ${baseURL}    
-    FOR    ${count}    IN RANGE  ${currentcolno}     11    #  ${len} 
+    FOR    ${count}    IN RANGE  ${currentcolno}     6    #  ${len} 
         Log To Console    ********************************************* 
         Log To Console    Row Number= ${count}    
         Log To Console    Company Name=${list}[${count}]  
@@ -223,9 +234,9 @@ SimilarTech excel Demo
 
    
 
-contiune for loop and update count linkedin
-    [Arguments]   ${count}   ${rowcount}  ${len} 
-     
+contiune for loop and update count linkedin  
+    [Arguments]   ${count}   ${rowcount}  ${len}  ${message} 
+     Log to console    ${message} 
     Open Excel Document    ${inputfilepath}    doc_id=input4
         Write Excel Cell    7    6    ${rowcount} 
         Write Excel Cell    9    6    ${count}

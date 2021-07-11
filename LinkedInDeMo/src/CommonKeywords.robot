@@ -13,6 +13,8 @@ common Open brower
     ${prefs}  Create Dictionary   download.default_directory=${downloadDir}
     Call Method  ${chrome_options}  add_experimental_option  prefs  ${prefs} 
     Call Method    ${chrome_options}    add_argument    --disable-gpu 
+    #Call Method    ${chrome_options}    add_argument    --headless
+    #Call Method    ${chrome_options}    setPageLoadStrategy     PageLoadStrategy.NORMAL
     Log To Console    ${EXECDIR}${/}      
     ${desired_caps}=  Create Dictionary  browserName=${browserName}  
     Open Browser   url=${url}  browser=chrome   desired_capabilities=${desired_caps}  options=${chrome_options}  executable_path=${EXECDIR}${/}LinkedInDemo${/}chromedriver.exe 
