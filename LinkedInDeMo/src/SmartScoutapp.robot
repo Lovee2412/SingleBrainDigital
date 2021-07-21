@@ -55,7 +55,7 @@ smartscout brand info export
    # wait until page contains element    //button[@id="btnClear"]                             40s
     common click element        clicking on clear            //button[@id="btnClear"]  
     #Wait Until Page Contains Element    //div[@class="mat-select-arrow ng-tns-c110-41"]      50s
-    common Click Element    clicking on an arrow            //div[@class="mat-select-arrow ng-tns-c110-41"]
+    common Click Element    clicking on an arrow            (//span[contains(.,"- All -")])[2]
     #Wait Until Page Contains Element    //input[@placeholder="Select category"]              50s
     common Input Text        Entering category      //input[@placeholder="Select category"]              ${category} 
     common Click Element  clicking on search        //span[@class="mat-option-text" and contains(.,'${category}')] 

@@ -43,7 +43,7 @@ ${browserName}                  chrome
 
 
 SimilarTech
-    [Arguments]      ${filename}   ${rownum}  ${outputColstart}
+    [Arguments]      ${filename}   ${rownum}  ${outputColstart}   ${excefilename}
        Open Excel Document    ${filename}    doc_id=id
         Reload Page 
         Run Keyword And Continue On Failure  Wait Until Page Contains Element    //div[@class="visits-value"]    60s
@@ -56,9 +56,9 @@ SimilarTech
         ${display}=  Run Keyword And Continue On Failure   get text              //li[@data-key="display"]//div[@class="legend-value"]
         ${referrals}=  Run Keyword And Continue On Failure  get text           //li[@data-key="referrals"]//div[@class="legend-value"]
         ${mail}=  Run Keyword And Continue On Failure   get text               //li[@data-key="mail"]//div[@class="legend-value"]    
-        log to console                    Monthly Visits = ${monthlyvisit}
-        log to console                    Direct = ${direct}
-        log to console                    Search = ${serach}
+        Write logs  ${excefilename}                    Monthly Visits = ${monthlyvisit}
+        Write logs  ${excefilename}                   Direct = ${direct}
+        Write logs  ${excefilename}                    Search = ${serach}
         log to console                    Social = ${social}
         log to console                    Display = ${display}
         log to console                    Referrals = ${referrals}
